@@ -909,7 +909,74 @@ main {
 <section
     id="configPanel"
     class="hidden">
+<div id="configPanel" style="
+    display:none;
+    padding:25px;
+    max-width:700px;
+    margin:30px auto;
+">
+    <div class="card">
+        <h2>⚙️ Configurações</h2>
 
+        <p><strong>Usuário atual:</strong></p>
+        <div id="configUsuario">-</div>
+
+        <p><strong>Apelido atual:</strong></p>
+        <div id="configApelido">-</div>
+
+        <hr>
+
+        <h3>👑 Dev / Criador</h3>
+
+        <input
+            type="password"
+            id="devPassword"
+            placeholder="Senha do Dev"
+        >
+
+        <button onclick="abrirDev()">
+            Entrar como Dev
+        </button>
+
+        <button onclick="voltarPrincipal()">
+            ← Voltar
+        </button>
+    </div>
+</div>
+<script>
+function abrirConfiguracoes() {
+    const principal = document.getElementById("mainPanel");
+    const config = document.getElementById("configPanel");
+
+    if (principal) principal.style.display = "none";
+    if (config) config.style.display = "block";
+
+    const usuario = document.getElementById("configUsuario");
+    const apelido = document.getElementById("configApelido");
+
+    if (usuario) usuario.textContent = usuarioAtual || "-";
+    if (apelido) apelido.textContent = apelidoAtual || "-";
+}
+
+function voltarPrincipal() {
+    const principal = document.getElementById("mainPanel");
+    const config = document.getElementById("configPanel");
+
+    if (config) config.style.display = "none";
+    if (principal) principal.style.display = "block";
+}
+
+function abrirDev() {
+    const senha = document.getElementById("devPassword").value;
+
+    if (senha !== "GZD777") {
+        alert("Senha do Dev incorreta.");
+        return;
+    }
+
+    alert("Acesso de Dev liberado.");
+}
+</script>
     function abrirConfigPanel() {
     document.getElementById("mainPanel").style.display = "none";
     document.getElementById("configPanel").style.display = "block";
