@@ -910,6 +910,11 @@ main {
     id="configPanel"
     class="hidden">
 
+    function abrirConfigPanel() {
+    document.getElementById("mainPanel").style.display = "none";
+    document.getElementById("configPanel").style.display = "block";
+}
+    
     <div class="welcome">
 
         <h1>
@@ -957,7 +962,7 @@ main {
 
                 <div
                     class="info-value"
-                    id="currentNickname">
+                    id="currentPassword">
                 </div>
 
             </div>
