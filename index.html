@@ -651,7 +651,7 @@ main {
 
         <div class="input-group">
 
-            <label>Senha</label>
+            <label> Senha</label>
 
             <input
                 type="text"
@@ -1286,16 +1286,52 @@ async function entrar() {
             });
 
 
-        if (error) {
+async function entrar() {
+    const user = document.getElementById("loginUser").value.trim();
+    const nickname = document.getElementById("loginNickname").value.trim();
 
-    console.error("ERRO SUPABASE:", error);
+    if (!user || !nickname) {
+        alert("Preencha o usuário e o apelido.");
+        return;
+    }
 
-    alert(
-        "Erro do Supabase: " + error.message
-    );
+    if (!supabaseClient) {
+        alert("Supabase não foi inicializado. Verifique a Publishable Key.");
+        return;
+    }
 
-    return;
+    const resultado = await supabaseClient
+        .from("registros")
+        .insert({
+            usuario: user,
+            apelido: nickname
+        });
 
+    if (resultado.error) {
+        alert(
+            "ERRO EXATO DO SUPABASE:\n\n" +
+            resultado.error.message
+        );
+
+        console.error(resultado.error);
+        return;
+    }
+
+    usuarioAtual = user;
+    apelidoAtual = nickname;
+
+    database.users.push({
+        user: usuarioAtual,
+        nickname: apelidoAtual,
+        createdAt: new Date().toLocaleString("pt-BR")
+    });
+
+    registrarEvento("Entrada no sistema");
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("mainPanel").style.display = "block";
+
+    atualizarInterface();
 }
 
     }
