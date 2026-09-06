@@ -1288,15 +1288,15 @@ async function entrar() {
 
         if (error) {
 
-            console.error(error);
+    console.error("ERRO SUPABASE:", error);
 
-            alert(
-                "Não foi possível registrar os dados online. Verifique a configuração do Supabase."
-            );
+    alert(
+        "Erro do Supabase: " + error.message
+    );
 
-            return;
+    return;
 
-        }
+}
 
     }
 
